@@ -87,16 +87,13 @@ fn suggest_non_zero_conversion(
     target_non_zero_type: &str,
     arg_snippet: &str,
 ) {
-    let suggestion = format!("{}::{}({})", target_non_zero_type, fn_name, arg_snippet);
+    let suggestion = format!("{target_non_zero_type}::{fn_name}({arg_snippet})");
     span_lint_and_sugg(
         cx,
         NON_ZERO_SUGGESTIONS,
         expr.span,
-        format!(
-            "Consider using `{}::{}()` for more efficient and type-safe conversion",
-            target_non_zero_type, fn_name
-        ),
-        "Replace with",
+        format!("consider using `{target_non_zero_type}::{fn_name}()` for more efficient and type-safe conversion"),
+        "replace with",
         suggestion,
         Applicability::MachineApplicable,
     );
